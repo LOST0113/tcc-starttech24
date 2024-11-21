@@ -1,24 +1,36 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ProdutosCartService } from '../../services/produtos-cart.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
+  length: number = 0;
 
-  constructor(private renderer: Renderer2, private el: ElementRef) { }
+  constructor(private productCartService: ProdutosCartService) { }
 
   ngOnInit(): void {
+    this.productCartService.totalItens$.subscribe(a => {
+      this.length = a;
+    });
     
-  }
-  
-  toggleCollapse() {
-    const colapse = this.el.nativeElement.querySelector("colapse");
-    
-    this.renderer.setStyle(colapse, "display", "none");
+    const totalItens = this.productCartService.getTotalItens();
+    console.log(totalItens);
+
+    if(totalItens) {
+      this.length = totalItens;
+      console.log("True");
+      
+    } else {
+      console.log("False");
+      
+    }
+
   }
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IProduto } from '../../models/produto.model';
 import { CommonModule } from '@angular/common';
+import { ProdutosService } from '../../services/produtos.service';
+import { ProdutosCartService } from '../../services/produtos-cart.service';
 
 @Component({
   selector: 'app-populars',
@@ -10,13 +12,13 @@ import { CommonModule } from '@angular/common';
   styleUrl: './populars.component.scss'
 })
 export class PopularsComponent {
-  produtos: IProduto[] = [{name: "Grifo", image: "images/caneca.jpg", description: "Night lamp", price: 200},
-    {name: "Grifo", image: "images/caneca.jpg", description: "Night lamp", price: 200},
-    {name: "Grifo", image: "images/caneca.jpg", description: "Night lamp", price: 200},
-    {name: "Grifo", image: "images/caneca.jpg", description: "Night lamp", price: 200},
-    {name: "Grifo", image: "images/caneca.jpg", description: "Night lamp", price: 200},
-    {name: "Grifo", image: "images/caneca.jpg", description: "Night lamp", price: 200},
-    {name: "Grifo", image: "images/caneca.jpg", description: "Night lamp", price: 200},
-    {name: "Grifo", image: "images/caneca.jpg", description: "Night lamp", price: 200}
-  ];
+  produtos?: Array<IProduto>;
+
+  constructor(private produtosService: ProdutosService, private produtosCartService: ProdutosCartService) { 
+    this.produtos = this.produtosService.getProducts()
+  }
+
+  addToCart(product: IProduto) {
+    this.produtosCartService.addProduct(product);
+  }
 }

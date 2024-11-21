@@ -9,7 +9,7 @@
                 <p class="price">{{produto.price | currency: "BRL"}}</p>
             </div>
             <div class="hover">
-                <button class="addtocart">Adicionar ao Carrinho</button>
+                <button (click)="addToCart(produto)" class="addtocart">Adicionar ao Carrinho</button>
                 <div class="add">
                     <a href="#"><i class="fa-solid fa-share-nodes"></i> Share</a>
                     <a href="#"><i class="fa-solid fa-code-compare"></i> Compare</a>

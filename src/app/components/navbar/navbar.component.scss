@@ -58,6 +58,27 @@
 
     .nav-icons {
         width: 140px;
+
+        .cart-area {
+            position: relative;
+            
+            
+            .cart-number {
+                position: absolute;
+                top: 0;
+                right: 0;
+                background-color: red;
+                width: 60%;
+                height: 50%;
+                border-radius: 50%;
+                color: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 12px;
+            }
+        }
+        
     }
 }
 

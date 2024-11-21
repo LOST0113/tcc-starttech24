@@ -1,8 +1,7 @@
-export interface IProduto {
+export interface IProdutoCart {
     id: number,
     name: string,
     image: string,
-    category: string,
     description: string,
     quantity: number,
     price: number
