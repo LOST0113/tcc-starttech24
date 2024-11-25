@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IProduto } from '../../models/produto.model';
 import { CommonModule } from '@angular/common';
 import { ProdutosService } from '../../services/produtos.service';
 import { ProdutosCartService } from '../../services/produtos-cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-populars',
@@ -11,14 +12,16 @@ import { ProdutosCartService } from '../../services/produtos-cart.service';
   templateUrl: './populars.component.html',
   styleUrl: './populars.component.scss'
 })
-export class PopularsComponent {
+export class PopularsComponent implements OnInit{
   produtos?: Array<IProduto>;
 
-  constructor(private produtosService: ProdutosService, private produtosCartService: ProdutosCartService) { 
-    this.produtos = this.produtosService.getProducts()
+  constructor(private router: Router, private produtosService: ProdutosService, private produtosCartService: ProdutosCartService) { }
+
+  ngOnInit(): void {
+    this.produtosService.getProducts().subscribe(a => this.produtos = a); 
   }
 
-  addToCart(product: IProduto) {
-    this.produtosCartService.addProduct(product);
+  viewProduct(id: number) {
+    this.router.navigate([`/produto/${id}`]);
   }
 }

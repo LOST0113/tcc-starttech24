@@ -8,10 +8,8 @@ import { IProduto } from '../models/produto.model';
 })
 export class ProdutosCartService {
   private cartProducts: Array<IProdutoCart> = [
-    {id: 10, name: "Shirt", image: "images/caneca.jpg", description: "asa", quantity: 10, price: 1222},
-    {id: 11, name: "Shirt", image: "images/caneca.jpg", description: "asa", quantity: 10, price: 1222},
-    {id: 12, name: "Shirt", image: "images/caneca.jpg", description: "asa", quantity: 10, price: 1222},
-    {id: 13, name: "Shirt", image: "images/caneca.jpg", description: "asa", quantity: 10, price: 1222}
+    {id: 9999, name: "Shirt", image: "images/caneca.jpg", description: "asa", quantity: 1, price: 1222},
+
   ];
 
   private totalItens = new BehaviorSubject<number>(0);
@@ -20,10 +18,19 @@ export class ProdutosCartService {
 
   constructor() { }
 
-  addProduct(product: IProduto) {
+  addProduct(product: IProduto, quantity: number) {
     const findProduct = this.cartProducts.find(value => value.id == product.id);
     if(findProduct) {
-      findProduct.quantity++
+      
+      if (quantity > 1) {
+        console.log(findProduct.quantity + " " + quantity);
+        
+        console.log(findProduct.quantity)
+        findProduct.quantity = Number(findProduct.quantity) + Number(quantity);
+        console.log(findProduct.quantity)
+      } else {
+        findProduct.quantity++
+      }
       this.updateTotalItens();
       return;
     }
@@ -33,7 +40,7 @@ export class ProdutosCartService {
       name: product.name,
       image: product.image,
       description: product.description,
-      quantity: 1,
+      quantity: Number(quantity),
       price: product.price
     }
 

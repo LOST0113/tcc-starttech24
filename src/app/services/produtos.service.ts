@@ -1,23 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { IProduto } from '../models/produto.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProdutosService {
-  produtos: Array<IProduto> = [{id: 1, name: "Grifo", image: "images/caneca.jpg", category: "caneca", description: "Night lamp", quantity: 10, price: 200},
-    {id: 2, name: "Fone de Ouvidos", image: "images/caneca.jpg", category: "caneca", description: "Night lamp", quantity: 10, price: 100},
-    {id: 3, name: "Cadeira", image: "images/caneca.jpg", category: "caneca", description: "Night lamp", quantity: 10, price: 300.2},
-    {id: 4, name: "Smartphone", image: "images/caneca.jpg", category: "caneca", description: "Night lamp", quantity: 10, price: 1500},
-    {id: 5, name: "Notebook", image: "images/caneca.jpg", category: "caneca", description: "Night lamp", quantity: 10, price: 3250},
-    {id: 6, name: "Pc Gamer", image: "images/caneca.jpg", category: "caneca", description: "Night lamp", quantity: 10, price: 5065},
-    {id: 7, name: "Tablet", image: "images/caneca.jpg", category: "caneca", description: "Night lamp", quantity: 10, price: 754},
-    {id: 8, name: "Mesa gamer", image: "images/caneca.jpg", category: "caneca", description: "Night lamp", quantity: 10, price: 487}
-  ];
+export class ProdutosService{
+  private urlApi = "http://localhost:3000";
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getProducts(): Array<IProduto> {
-    return this.produtos;
+  getProducts(): Observable<IProduto[]> {
+    return this.http.get<IProduto[]>(`${this.urlApi}/produtos`);
   }
 }

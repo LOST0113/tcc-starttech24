@@ -86,6 +86,8 @@ section {
         font-size: 16px;
         font-weight: 500;
         color: #898989;
+        max-height: 100px;
+        overflow: hidden;
     }
 
     ul li .price {
