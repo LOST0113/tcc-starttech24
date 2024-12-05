@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ProdutosService } from '../../services/produtos.service';
 import { ProdutosCartService } from '../../services/produtos-cart.service';
 import { Router } from '@angular/router';
+import { IProduto1 } from '../../models/produto1.model';
 
 @Component({
   selector: 'app-populars',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrl: './populars.component.scss'
 })
 export class PopularsComponent implements OnInit{
-  produtos?: Array<IProduto>;
+  produtos?: Array<IProduto1>;
 
   constructor(private router: Router, private produtosService: ProdutosService, private produtosCartService: ProdutosCartService) { }
 
@@ -21,7 +22,7 @@ export class PopularsComponent implements OnInit{
     this.produtosService.getProducts().subscribe(a => this.produtos = a); 
   }
 
-  viewProduct(id: number) {
+  viewProduct(id: bigint) {
     this.router.navigate([`/produto/${id}`]);
   }
 }

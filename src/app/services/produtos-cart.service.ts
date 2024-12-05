@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import { IProdutoCart } from '../models/produtoCart.model';
 import { BehaviorSubject } from 'rxjs';
-import { IProduto } from '../models/produto.model';
+import { IProduto1 } from '../models/produto1.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProdutosCartService {
   private cartProducts: Array<IProdutoCart> = [
-    {id: 9999, name: "Shirt", image: "images/caneca.jpg", description: "asa", quantity: 1, price: 1222},
+    {id: BigInt(9999), name: "Shirt", image: {"id": BigInt(999),
+            "fileName": "bloquinho_tcc.webp",
+            "fileType": "image/webp",
+            "fileData": ""
+        }, description: "asa", quantity: 1, price: 1222},
 
   ];
 
@@ -18,8 +22,8 @@ export class ProdutosCartService {
 
   constructor() { }
 
-  addProduct(product: IProduto, quantity: number) {
-    const findProduct = this.cartProducts.find(value => value.id == product.id);
+  addProduct(product: IProduto1, quantity: number) {
+    const findProduct = this.cartProducts.find(value => value.id == product.id_produtos);
     if(findProduct) {
       
       if (quantity > 1) {
@@ -36,12 +40,12 @@ export class ProdutosCartService {
     }
 
     const newProduct = {
-      id: product.id,
-      name: product.name,
+      id: product.id_produtos,
+      name: product.nome,
       image: product.image,
-      description: product.description,
+      description: product.descricao,
       quantity: Number(quantity),
-      price: product.price
+      price: product.preco
     }
 
     this.cartProducts.push(newProduct);
@@ -52,7 +56,7 @@ export class ProdutosCartService {
     return this.cartProducts;
   }
 
-  decreaseQuantity(id: number): void {
+  decreaseQuantity(id: bigint): void {
     let a = this.cartProducts.find((value) => {
       return value.id == id;
     })
@@ -67,7 +71,7 @@ export class ProdutosCartService {
     }
   }
 
-  addQuantity(id: number): void {
+  addQuantity(id: bigint): void {
     let a = this.cartProducts.find((value) => {
       return value.id == id;
     })
@@ -79,7 +83,7 @@ export class ProdutosCartService {
     this.updateTotalItens();
   }
 
-  removeCart(id: number): void {
+  removeCart(id: bigint): void {
     this.cartProducts = this.cartProducts.filter(value => value.id !== id);
 
     this.updateTotalItens();

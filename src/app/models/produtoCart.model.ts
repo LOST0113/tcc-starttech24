@@ -1,8 +1,10 @@
+import { IImage } from "./image.model";
+
 export interface IProdutoCart {
-    id: number,
+    id: bigint,
     name: string,
-    image: string,
+    image: IImage,
     description: string,
     quantity: number,
-    price: number
+    price: number,
 }

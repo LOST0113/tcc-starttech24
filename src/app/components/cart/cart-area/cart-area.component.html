@@ -10,7 +10,7 @@
             <div class="border-top"></div>    
             <div *ngFor="let product of cartProducts" class="row border-bottom">
                 <div class="row main align-items-center">
-                    <div class="col-2"><img class="img-fluid" [src]="product.image"></div>
+                    <div class="col-2"><img class="img-fluid" [src]="'data:' + product.image.fileType + ';base64,' + product.image.fileData"></div>
                     <div class="col">
                         <div class="row text-muted">{{product.name}}</div>
                         <div class="row">{{product.description}}</div>

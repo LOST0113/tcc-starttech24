@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IProduto } from '../../../models/produto.model';
+import { IProduto1 } from '../../../models/produto1.model';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ProdutosService } from '../../../services/produtos.service';
@@ -14,19 +14,18 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './produto-area.component.scss'
 })
 export class ProdutoAreaComponent {
-  produto!: IProduto;
+  produto!: IProduto1;
   quantity: number = 1;
-  produtos!: Array<IProduto>;
+  produtos!: Array<IProduto1>;
 
   constructor(private produtosCartService: ProdutosCartService, private routes: ActivatedRoute, private produtosService: ProdutosService) { }
 
-  
   ngOnInit(): void {
     this.produtosService.getProducts().subscribe(a => {
       this.produtos = a;
       
-      const id = Number(this.routes.snapshot.paramMap.get("id"));
-      const buscaProduto = this.produtos.find(value => value.id == id);
+      const id = BigInt(this.routes.snapshot.paramMap.get("id")!);
+      const buscaProduto = this.produtos.find(value => value.id_produtos == id);
     if (buscaProduto) {
       this.produto = buscaProduto;
     }
@@ -34,16 +33,16 @@ export class ProdutoAreaComponent {
     });
   }
 
-  addCart(id: number) {
+  addCart(id: bigint) {
     if (id === undefined) {
       console.error("Id is undefined");
       return
     }
     
-    const product = this.produtos.find(p => p.id == id);
+    const product = this.produtos.find(p => p.id_produtos == id);
     if (product) {
       if (this.quantity > 1) {
-        product.quantity = this.quantity;
+        product.quantidade = this.quantity;
       }
       this.produtosCartService.addProduct(product, this.quantity);
     } else {

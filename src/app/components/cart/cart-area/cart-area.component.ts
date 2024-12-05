@@ -35,20 +35,20 @@ export class CartAreaComponent implements OnInit{
     this.length = this.produtosCartService.getLength();
   }
 
-  decreaseQuantity(id: number): void {
+  decreaseQuantity(id: bigint): void {
     this.produtosCartService.decreaseQuantity(id);
     this.loadProductsCart();
     this.loadTotalPrice();
     this.loadLength();
   }
 
-  addQuantity(id: number): void {
+  addQuantity(id: bigint): void {
     this.produtosCartService.addQuantity(id);
     this.loadProductsCart()
     this.loadTotalPrice();
   }
 
-  removeCart(id: number): void {
+  removeCart(id: bigint): void {
     this.produtosCartService.removeCart(id);
     this.loadProductsCart();
     this.loadTotalPrice();
