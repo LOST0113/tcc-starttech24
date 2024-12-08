@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
+  isCartShaking: boolean = false;
   length: number = 0;
 
   constructor(private productCartService: ProdutosCartService) { }
@@ -18,6 +19,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.productCartService.totalItens$.subscribe(a => {
       this.length = a;
+      this.isCartShaking = true;
     });
     
     const totalItens = this.productCartService.getTotalItens();
@@ -31,6 +33,9 @@ export class NavbarComponent implements OnInit {
       console.log("False");
       
     }
+  }
 
+  onAnimationEnd() {
+    this.isCartShaking = false;
   }
 }

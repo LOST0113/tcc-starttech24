@@ -2,7 +2,7 @@
     <div class="row g-4">
       <!-- Imagem do produto -->
       <div class="col-md-4 d-flex justify-content-center align-items-center">
-        <img [src]="'data:' + produto.image.fileType + ';base64,' + produto.image.fileData" alt="Imagem do Produto" class="img-fluid rounded">
+        <img [src]="'data:' + produto.image.fileType + ';base64,' + produto.image.fileData" [alt]="produto.nome" class="img-fluid rounded">
       </div>
 
       <!-- Informações do produto -->

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduto } from '../../models/produto.model';
 import { CommonModule } from '@angular/common';
 import { ProdutosService } from '../../services/produtos.service';
 import { ProdutosCartService } from '../../services/produtos-cart.service';

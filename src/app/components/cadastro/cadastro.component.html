@@ -2,16 +2,42 @@
 <main>
     <section class="form-area">
         <h3 class="titulo">Informações</h3>
-        <form>
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
             <div class="form-item">
-                <input placeholder="Nome Completo" class="input nome" name="nome" id="nome" type="text">
-                <input placeholder="Telefone" class="input telefone" name="telefone" id="telefone" type="tel">
+                <div>
+                    <input placeholder="Nome Completo" class="input nome" formControlName="nome" name="nome" id="nome" type="text">
+                    <div *ngIf="myForm.get('nome')?.invalid && myForm.get('nome')?.touched">
+                        <small *ngIf="myForm.get('nome')?.errors?.['required']">Nome é Obrigatório</small>
+                        <small *ngIf="myForm.get('nome')?.errors?.['minlength']">
+                            Mínimo 3 caracteres
+                        </small>
+                    </div>
+                </div>
+                <div>
+                    <input placeholder="Telefone" class="input telefone" formControlName="telefone" name="telefone" id="telefone" type="tel">
+                    <div *ngIf="myForm.get('telefone')?.invalid && myForm.get('telefone')?.touched">
+                        <small *ngIf="myForm.get('telefone')?.errors?.['required']">Telefone é Obrigatório</small>
+                      </div>
+                </div>
             </div>
             <div class="form-item">
-                <input placeholder="Email" class="input email" name="email" id="email" type="email">
-                <input placeholder="Senha" class="input senha" name="senha" id="senha" type="password">
+                <div>
+                    <input placeholder="Email" class="input email" formControlName="email" name="email" id="email" type="email">
+                    <div *ngIf="myForm.get('email')?.invalid && myForm.get('email')?.touched">
+                        <small *ngIf="myForm.get('email')?.errors?.['required']">Email é obrigatório</small>
+                    </div>
+                </div>
+                <div>
+                    <input placeholder="Senha" class="input senha" formControlName="password" name="senha" id="senha" type="password">
+                    <div *ngIf="myForm.get('password')?.invalid && myForm.get('password')?.touched">
+                        <small *ngIf="myForm.get('password')?.errors?.['required']">Senha é Obrigatório</small>
+                        <small *ngIf="myForm.get('password')?.errors?.['minlength']">
+                            Mínimo 6 caracteres
+                        </small>
+                      </div>
+                </div>
             </div>
-            <input class="botao" type="button" value="Cadastrar">
+            <input class="botao" [disabled]="myForm.invalid" type="submit" value="Cadastrar">
         </form>
     </section>
 </main>

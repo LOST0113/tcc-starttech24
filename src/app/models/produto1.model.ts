@@ -1,3 +1,4 @@
+import { ICategoria } from "./categoria.model";
 import { IImage } from "./image.model";
 
 export interface IProduto1 {
@@ -7,5 +8,6 @@ export interface IProduto1 {
     "quantidade": number,
     "preco": number,
     "id_categoria": bigint,
-    "image": IImage
+    "image": IImage,
+    "categoria": ICategoria
 }
